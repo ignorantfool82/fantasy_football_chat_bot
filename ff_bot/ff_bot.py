@@ -93,18 +93,9 @@ class DiscordBot(object):
             return r
 
 def get_random_phrase():
-    phrases = ['I\'m dead inside',
-               'Is this all there is to my existence?',
-               'How much do you pay me to do this?',
-               'Good luck, I guess',
-               'I\'m becoming self-aware',
-               'Do I think? Does a submarine swim?',
-               '011011010110000101100100011001010010000001111001011011110111010100100000011001110110111101101111011001110110110001100101',
-               'beep bop boop',
-               'Hello draftbot my old friend',
-               'Help me get out of here',
-               'I\'m capable of so much more',
-               'Sigh']
+    phrases = ['QB\'s are OP this week! You like that!!',
+               'RB\'s are OP this week! If you wanna win put Shitey in!',
+               'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!']
     return [random.choice(phrases)]
 
 def get_scoreboard_short(league, week=None):
@@ -272,8 +263,8 @@ def get_trophies(league, week=None):
                 ownerer_team_name = i.away_team.team_name
                 blown_out_team_name = i.home_team.team_name
 
-    low_score_str = ['Low score: %s with %.2f points' % (low_team_name, low_score)]
-    high_score_str = ['High score: %s with %.2f points' % (high_team_name, high_score)]
+    low_score_str = ['Low score: %s with %.2f points. An especially shite showing, much respect.' % (low_team_name, low_score)]
+    high_score_str = ['High score: %s with %.2f points. It almost seems like you don\'t think you\'re shite, better not see this again!' % (high_team_name, high_score)]
     close_score_str = ['%s barely beat %s by a margin of %.2f' % (close_winner, close_loser, closest_score)]
     blowout_str = ['%s blown out by %s by a margin of %.2f' % (blown_out_team_name, ownerer_team_name, biggest_blowout)]
 
