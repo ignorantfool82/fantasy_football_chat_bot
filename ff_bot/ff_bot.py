@@ -175,7 +175,7 @@ def all_played(lineup):
             return False
     return True
 
-def get_matchups(league, random_phrase, week=None):
+def get_matchups(league, week=None):
     #Gets current week's Matchups
     matchups = league.box_scores(week=week)
 
@@ -184,8 +184,6 @@ def get_matchups(league, random_phrase, week=None):
              if i.away_team]
 
     text = ['Matchups'] + score
-    if random_phrase:
-        text = text + get_random_phrase()
     return '\n'.join(text)
 
 def get_close_scores(league, week=None):
@@ -204,7 +202,7 @@ def get_close_scores(league, week=None):
     text = ['Close Scores'] + score
     return '\n'.join(text)
 
-def get_power_rankings(league, week=None):
+def get_power_rankings(league,random_phrase, week=None):
     # power rankings requires an integer value, so this grabs the current week for that
     if not week:
         week = league.current_week
@@ -216,6 +214,8 @@ def get_power_rankings(league, week=None):
     score = ['%s - %s' % (i[0], i[1].team_name) for i in power_rankings
              if i]
     text = ['Power Rankings'] + score
+    if random_phrase:
+        text = text + get_random_phrase()
     return '\n'.join(text)
 
 def get_trophies(league, week=None):
@@ -354,11 +354,11 @@ def bot_main(function):
 #        league = League(league_id=league_id, year=year, username=espn_username, password=espn_password)
 
     if test:
-        print(get_matchups(league,random_phrase))
+        print(get_matchups(league))
         print(get_scoreboard_short(league))
         print(get_projected_scoreboard(league))
         print(get_close_scores(league))
-        print(get_power_rankings(league))
+        print(get_power_rankings(league,random_phrase))
         print(get_scoreboard_short(league))
         print(get_standings(league, top_half_scoring))
         function="get_final"
@@ -368,7 +368,7 @@ def bot_main(function):
 
     text = ''
     if function=="get_matchups":
-        text = get_matchups(league,random_phrase)
+        text = get_matchups(league)
         text = text + "\n\n" + get_projected_scoreboard(league)
     elif function=="get_scoreboard_short":
         text = get_scoreboard_short(league)
@@ -378,7 +378,7 @@ def bot_main(function):
     elif function=="get_close_scores":
         text = get_close_scores(league)
     elif function=="get_power_rankings":
-        text = get_power_rankings(league)
+        text = get_power_rankings(league,random_phrase)
     elif function=="get_trophies":
         text = get_trophies(league)
     elif function=="get_standings":
