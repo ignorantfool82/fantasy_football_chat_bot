@@ -92,32 +92,11 @@ class DiscordBot(object):
 
             return r
 
-# Set global variable for OP
-global op_set
-op_set = 'QB'
-
 def get_random_phrase():
-    if op_set == 'QB':
-        newOP = random.choice(['RB', 'WR'])
-        if newOP == 'RB':
-            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'
-        else:
-            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
-    elif op_set == 'RB':
-        newOP = random.choice(['QB', 'WR'])
-        if newOP == 'QB':
-            phrase = 'QB\'s are OP this week! You like that!!'
-        else:
-            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
-    else:
-        newOP = random.choice(['QB', 'RB'])
-        if newOP == 'QB':
-            phrase = 'QB\'s are OP this week! You like that!!'
-        else:
-            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'           
-    global op_set
-    op_set = newOP
-    return [phrase]
+    phrases = ['QB\'s are OP this week! You like that!!',
+               'RB\'s are OP this week! If you wanna win put Shitey in!',
+               'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!']
+    return [random.choice(phrases)]
 
 def get_scoreboard_short(league, week=None):
     #Gets current week's scoreboard
