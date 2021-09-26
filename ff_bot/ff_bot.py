@@ -92,11 +92,26 @@ class DiscordBot(object):
 
             return r
 
-def get_random_phrase():
-    phrases = ['QB\'s are OP this week! You like that!!',
-               'RB\'s are OP this week! If you wanna win put Shitey in!',
-               'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!']
-    return [random.choice(phrases)]
+def get_random_phrase(op_set):
+    if op_set == 'QB':
+        newOP = random.choice(['RB', 'WR'])
+        if newOP == 'RB':
+            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'
+        else:
+            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
+    elif op_set == 'RB':
+        newOP = random.choice(['QB', 'WR'])
+        if newOP == 'QB':
+            phrase = 'QB\'s are OP this week! You like that!!'
+        else:
+            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
+    else:
+        newOP = random.choice(['QB', 'RB'])
+        if newOP == 'QB':
+            phrase = 'QB\'s are OP this week! You like that!!'
+        else:
+            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'           
+    return [phrase]
 
 def get_scoreboard_short(league, week=None):
     #Gets current week's scoreboard
@@ -215,7 +230,11 @@ def get_power_rankings(league,random_phrase, week=None):
              if i]
     text = ['Power Rankings'] + score
     if random_phrase:
-        text = text + get_random_phrase()
+        try:
+            op_set = os.environ["CURRENT_OP"]
+        except KeyError:
+            op_set = 'QB'
+        text = text + get_random_phrase(op_set)
     return '\n'.join(text)
 
 def get_trophies(league, week=None):
