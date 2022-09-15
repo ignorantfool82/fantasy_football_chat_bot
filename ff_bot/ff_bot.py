@@ -93,24 +93,14 @@ class DiscordBot(object):
             return r
 
 def get_random_phrase(op_set):
-    if op_set == 'QB':
-        newOP = random.choice(['RB', 'WR'])
-        if newOP == 'RB':
-            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'
-        else:
-            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
-    elif op_set == 'RB':
-        newOP = random.choice(['QB', 'WR'])
-        if newOP == 'QB':
-            phrase = 'QB\'s are OP this week! You like that!!'
-        else:
-            phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
+    newOP = random.choice(['RB', 'WR', 'QB'])
+    if newOP == 'RB':
+        phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'
+    elif newOP == 'WR':
+        phrase = 'WR\'s are OP this week! I\'m gonna play Megashite and Chad Ochoshiteo!'
     else:
-        newOP = random.choice(['QB', 'RB'])
-        if newOP == 'QB':
-            phrase = 'QB\'s are OP this week! You like that!!'
-        else:
-            phrase = 'RB\'s are OP this week! If you wanna win put Shitey in!'           
+        newOP = 'QB'
+        phrase = 'QB\'s are OP this week! You like that!!'    
     return [phrase]
 
 def get_scoreboard_short(league, week=None):
